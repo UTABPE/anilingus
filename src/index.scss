@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  display: flex;
+  justify-content: center;
+}
+#root {
+  // width: 100%;
+}
+//PC
+.App {
+  max-width: 1280px;
+  display: flex;
+  justify-content: center;
+  color: rgb(181, 67, 2);
+  background-color: pink;
+
+  .navbar-container {
+    padding: 5px 32px;
+    height: 80px;
+    border-bottom: 4px solid black;
+    background-color: aqua;
+  }
+  .footer-container {
+    height: 100px;
+    min-width: 320px;
+    padding: 0 56px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .layout {
+    max-width: 1280px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    .layout-sider {
+      width: 240px;
+      background-color: aqua;
+    }
+    .layout-content {
+      width: 100%;
+      max-width: 1040px;
+    }
+  }
+
+  .marry-go-round {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 56px 14px;
+    gap: 14px;
+
+    .marry-go-round__list {
+      max-width: 100%;
+      min-width: 320px;
+      white-space: nowrap;
+      overflow-x: scroll;
+
+      .marry-go-round__list__item {
+        width: 128px;
+        height: 190px;
+        display: inline-block;
+        background-color: azure;
+      }
+      .marry-go-round__list__item:not(:last-child) {
+        margin-right: 32px;
+      }
+    }
+  }
+
+  .anime-list-container {
+    min-width: 320px;
+    max-width: 100%;
+    padding: 0 56px;
+    display: flex;
+    flex-direction: column;
+    .anime-list-item {
+      height: 80px;
+      overflow: hidden;
+      border-bottom: 2px solid black;
+      .anime-list-item__plot {
+        white-space: nowrap;
+      }
+    }
+  }
+}
+//Little PC
+@media (max-width: 1024px) {
+  .App {
+    max-width: 1024px;
+    .navbar-container {
+      background-color: red;
+    }
+
+    .layout {
+      .layout-sider {
+        display: none;
+      }
+      .layout-content {
+      }
+    }
+
+    .marry-go-round {
+      padding: 32px 44px 14px;
+
+      .marry-go-round__list {
+        .marry-go-round__list__item {
+          margin-right: 10px;
+        }
+      }
+    }
+    .footer {
+      height: 150px;
+    }
+  }
+}
+//Tablet
+@media (max-width: 768px) {
+  .App {
+    min-width: 320px;
+
+    .navbar-container {
+      height: 145px;
+      background-color: green;
+    }
+
+    .layout {
+      .layout-content {
+      }
+    }
+
+    .marry-go-round {
+      padding: 32px 31px 14px;
+    }
+  }
+}
+//Phone
+@media (max-width: 320px) {
+  .App {
+    min-width: 320px;
+    .navbar-container {
+      height: 145px;
+      background-color: orange;
+    }
+  }
+}
