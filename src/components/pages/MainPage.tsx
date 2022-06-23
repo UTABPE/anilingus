@@ -20,7 +20,7 @@ export function MainPage() {
           hasNextPage
           perPage
         }
-        mediaTrends(mediaId: $id, ){
+        mediaTrends(type: ANIME, mediaId: $id, ){
           mediaId
           date
           media{
@@ -54,7 +54,7 @@ export function MainPage() {
     };
 
   useEffect(() => {
-    // fetch(url, options).then((data) => console.log(data.json()));
+    fetch(url, options).then((data) => console.log(data.json()));
   }, [variables]);
 
   return (

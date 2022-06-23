@@ -6,11 +6,59 @@ import useWindowDimensions from "./../../hooks/useWidnowDimension";
 
 import { MeryGoLife, SibarButtons, NewAnime } from "../../fakedata";
 import { Title } from "./../UI/atoms/Title";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimeListItem } from "../UI/atoms/AnimeListItem";
+var query = `
+    query ($page: Int, $perPage: Int, ) {
+      Page(page: $page, perPage: $perPage){
+        media(type: ANIME, sort: UPDATED_AT_DESC){
+          id
+          updatedAt
+          coverImage {
+            medium
+            color
+          }	
+          siteUrl
+          title{
+            romaji
+            english
+            native
+            userPreferred
+          }
+        }
+      }
+    }
+    `;
 
+var variables = {
+  // search: "Fate/Zero",
+  page: 1,
+  perPage: 25,
+};
+
+var url = "https://graphql.anilist.co",
+  options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      query: query,
+      variables: variables,
+    }),
+  };
 export function MainPageV2() {
   const { width } = useWindowDimensions();
+  const [animeList, setAnimeList] = useState([]);
+
+  useEffect(() => {
+    fetch(url, options)
+      .then((resp) => resp.json())
+      // .then((data) => console.log(data));
+      .then((data) => setAnimeList(data.data.Page.media));
+    console.log(animeList);
+  }, [variables]);
   return (
     <div className="layout">
       <div className="layout-sider">SIDER</div>
@@ -37,8 +85,8 @@ export function MainPageV2() {
           className="anime-list-container"
           style={{ width: `${width > 1024 ? width - 100 : width - 0}px` }}
         >
-          {NewAnime.map((anime, index) => {
-            return <AnimeListItem key={anime.key} anime={anime} />;
+          {animeList?.map((anime: any, index) => {
+            return <AnimeListItem key={anime.id} anime={anime} />;
           })}
         </div>
       </div>
