@@ -1,13 +1,10 @@
-import { Divider, Layout } from "antd";
-import { Content } from "antd/lib/layout/layout";
-import Sider from "antd/lib/layout/Sider";
-
 import useWindowDimensions from "./../../hooks/useWidnowDimension";
-
 import { MeryGoLife, SibarButtons, NewAnime } from "../../fakedata";
-import { Title } from "./../UI/atoms/Title";
 import { useEffect, useRef, useState } from "react";
 import { AnimeListItem } from "../UI/atoms/AnimeListItem";
+import { Sidebar } from "../UI/organisms/Sidebar";
+import { useFetch } from "./../../hooks/useFetch";
+
 var query = `
     query ($page: Int, $perPage: Int, ) {
       Page(page: $page, perPage: $perPage){
@@ -30,44 +27,20 @@ var query = `
     }
     `;
 
-var variables = {
-  // search: "Fate/Zero",
-  page: 1,
-  perPage: 25,
-};
-
-var url = "https://graphql.anilist.co",
-  options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    body: JSON.stringify({
-      query: query,
-      variables: variables,
-    }),
-  };
 export function MainPageV2() {
   const { width } = useWindowDimensions();
-  const [animeList, setAnimeList] = useState([]);
+  const { data, error, loading } = useFetch(query);
 
-  useEffect(() => {
-    fetch(url, options)
-      .then((resp) => resp.json())
-      // .then((data) => console.log(data));
-      .then((data) => setAnimeList(data.data.Page.media));
-    console.log(animeList);
-  }, [variables]);
+  console.log(data);
   return (
     <div className="layout">
-      <div className="layout-sider">SIDER</div>
+      <Sidebar />
       <div className="layout-content">
         <div className="marry-go-round">
           <div
             className="marry-go-round__list"
             style={{
-              width: `${width > 1024 ? width - 200 : width - 110}px`,
+              width: `${width > 1280 ? width - 200 : width - 110}px`,
             }}
           >
             {MeryGoLife.map((item) => (
@@ -83,9 +56,9 @@ export function MainPageV2() {
         </div>
         <div
           className="anime-list-container"
-          style={{ width: `${width > 1024 ? width - 100 : width - 0}px` }}
+          style={{ width: `${width > 1280 ? width - 100 : width - 0}px` }}
         >
-          {animeList?.map((anime: any, index) => {
+          {data?.data.Page.media.map((anime: any) => {
             return <AnimeListItem key={anime.id} anime={anime} />;
           })}
         </div>

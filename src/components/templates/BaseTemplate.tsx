@@ -5,7 +5,6 @@ export function BaseLayout() {
   return (
     <div>
       <NavbarV2 />
-      <div className="navbar__divider"></div>
       <Outlet />
       <AppFooter />
     </div>

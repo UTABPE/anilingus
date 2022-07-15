@@ -10,7 +10,7 @@ export const AnimeListItem = ({ anime }: any) => {
         <img src={anime.coverImage.medium} alt="" />
       </div>
       <div className="anime-list-item-description">
-        <div className="anime-list=item-description__date">
+        <div className="anime-list-item-description__date">
           {date.toDateString()}
         </div>
         <div className="anime-list-item-description__title">

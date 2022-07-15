@@ -1,6 +1,24 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+// @tailwind base;
+// @tailwind components;
+// @tailwind utilities;
+
+//widths
+
+$littlePC: 1280px;
+$tablet: 768px;
+$phone: 320px;
+
+//colors
+$orange-50: rgb(254 215 170);
+$orange-100: rgb(255 237 213);
+$orange-200: rgb(254 215 170);
+$orange-300: rgb(253 186 116);
+$orange-400: rgb(251 146 60);
+$orange-500: rgb(249 115 22);
+$orange-600: rgb(234 88 12);
+$orange-700: rgb(194 65 12);
+$orange-800: rgb(154 52 18);
+$orange-900: rgb(124 45 18);
 
 body {
   display: flex;
@@ -15,35 +33,55 @@ body {
   left: 0;
   display: flex;
   justify-content: center;
-  color: rgb(181, 67, 2);
-  background-color: pink;
-  .navbar__divider {
-    height: 80px;
-  }
+  color: $orange-700;
+
   .navbar-container {
+    width: 100%;
     height: 80px;
-    position: fixed;
+    position: sticky;
+    top: 0;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap: 25px;
+    gap: 5px;
     padding: 5px 32px;
+    background-color: white;
     border-bottom: 4px solid black;
-    background-color: aqua;
     z-index: 50;
+    .navbar-container__logo {
+      margin: 0;
+      color: inherit;
+      font-size: xx-large;
+    }
+    .navbar-container__search {
+      margin: 0 15px;
+      width: 100%;
+    }
+
     .navbar-container-buttons {
       display: flex;
       flex-direction: row;
+    }
+
+    .navbar-container-menu {
+      display: none;
+      .navbar-container-buttons__button {
+        width: 50px;
+        height: 50px;
+        padding: 0;
+        font-size: 25px;
+      }
     }
   }
   .footer-container {
     height: 100px;
     min-width: 320px;
-    padding: 25px 56px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding: 25px 56px;
+
     .footer-container__left {
       display: flex;
       flex-direction: row;
@@ -58,6 +96,18 @@ body {
     .layout-sider {
       width: 240px;
       background-color: aqua;
+      ul {
+        padding-left: 0px;
+        li {
+          position: relative;
+          list-style: none;
+          .dropdown-genres {
+            position: absolute;
+            left: 250px;
+            top: 0px;
+          }
+        }
+      }
     }
     .layout-content {
       width: 100%;
@@ -73,15 +123,15 @@ body {
     padding: 32px 56px 14px;
     gap: 14px;
     ::-webkit-scrollbar {
-      width: 12px; /* width of the entire scrollbar */
+      width: 5px; /* width of the entire scrollbar */
     }
     ::-webkit-scrollbar-track {
-      background: orange; /* color of the tracking area */
+      background: $orange-50; /* color of the tracking area */
     }
     ::-webkit-scrollbar-thumb {
-      background-color: blue; /* color of the scroll thumb */
+      background-color: $orange-600; /* color of the scroll thumb */
       border-radius: 20px; /* roundness of the scroll thumb */
-      border: 3px solid orange; /* creates padding around scroll thumb */
+      // border: 3px solid orange; /* creates padding around scroll thumb */
     }
     .marry-go-round__list {
       max-width: 100%;
@@ -89,7 +139,7 @@ body {
       white-space: nowrap;
       overflow-x: scroll;
       scrollbar-width: thin; /* "auto" or "thin" */
-      scrollbar-color: blue orange;
+      scrollbar-color: $orange-700 $orange-50;
 
       .marry-go-round__list__item {
         width: 128px;
@@ -129,12 +179,14 @@ body {
   }
 }
 //Little PC
-@media (max-width: 1024px) {
+@media (max-width: $littlePC) {
   .App {
-    max-width: 1024px;
+    max-width: $littlePC;
 
     .navbar-container {
-      background-color: red;
+      .navbar-container__logo {
+        font-size: calc(32px + 5 * (100vw - $littlePC) / (1280 - 768));
+      }
     }
 
     .layout {
@@ -162,13 +214,23 @@ body {
 //Tablet
 @media (max-width: 768px) {
   .App {
-    min-width: 320px;
-    .navbar__divider {
-      height: 145px;
-    }
+    position: absolute;
+
     .navbar-container {
       height: 145px;
-      background-color: green;
+
+      .navbar-container__logo {
+        font-size: 26px;
+      }
+      .navbar-container__search {
+        display: none;
+      }
+      .navbar-container-buttons {
+        display: none;
+      }
+      .navbar-container-menu {
+        display: block;
+      }
     }
 
     .layout {
@@ -177,17 +239,41 @@ body {
     }
 
     .marry-go-round {
-      padding: 32px 31px 14px;
+      padding: 32px 0 14px;
+      .marry-go-round__list {
+        .marry-go-round__list__item:not(:last-child) {
+          margin-right: 5px;
+        }
+      }
     }
   }
 }
 //Phone
 @media (max-width: 320px) {
   .App {
-    min-width: 320px;
+    position: absolute;
     .navbar-container {
+      width: 320px;
       height: 145px;
-      background-color: orange;
+      gap: 0px;
+    }
+    .marry-go-round {
+      width: 320px;
+      padding: 32px 0 14px;
+      align-items: baseline;
+    }
+    .anime-list-container {
+      padding: 0px;
+      .anime-list-item {
+        .anime-list-item-description {
+          font-size: 10px;
+          line-height: 10px;
+          // flex-direction: row;
+          .anime-list-item-description__date {
+            display: none;
+          }
+        }
+      }
     }
   }
 }
