@@ -1,37 +1,31 @@
-import { Button as ButtonAtom } from "../atoms/Button";
+import { MenuOutlined, UserOutlined } from "@ant-design/icons";
+import useWindowDimensions from "../../../hooks/useWidnowDimension";
+import { Button } from "../atoms/Button";
 import { Input } from "../atoms/Input";
-import styled from "@emotion/styled";
-import { Title } from "../atoms/Title";
-import { UserOutlined } from "@ant-design/icons";
 
-const Button = styled(ButtonAtom)`
-  height: 100%;
-`;
-export function Navbar() {
+export function NavbarV2() {
+  // const { width } = useWindowDimensions();
   return (
-    <section className="max-w-[1280px] h-20 navbar-container">
-      <div className="w-full h-full border-b-4 border-orange-200 flex flex-row items-center justify-between gap-10">
-        <Title level={1}>ANILINGUS</Title>
-        <Input placeholder="Search" className="w-full h-1/2" />
-        <div className="flex gap-5">
-          <Button>
-            <Title level={3}>ТОП 100</Title>
-          </Button>
-          <Button>
-            <Title level={3}>Аниме</Title>
-          </Button>
-          <Button>
-            <Title level={3}>Манга</Title>
-          </Button>
-          <Button>
-            <Title level={3}>Всякое мое</Title>
-          </Button>
-          <div className="text-white hover:text-orange-700 focus:text-orange-700">
-            <Button className="flex items-center bg-orange-700 text-2xl px-2   ">
-              <UserOutlined />
-            </Button>
-          </div>
-        </div>
+    <section
+      className="navbar-container"
+      // style={width > 1280 ? { width: 1280 } : { width: width }}
+    >
+      <h1 className="navbar-container__logo">ANILINGUS</h1>
+      <Input placeholder="Search" className="navbar-container__search" />
+      <div className="navbar-container-buttons">
+        <Button>ТОП 100</Button>
+        <Button>Аниме</Button>
+        <Button>Манга</Button>
+        <Button>Всякое Мое</Button>
+      </div>
+
+      <div className="navbar-container-menu">
+        <Button className="navbar-container-buttons__button">
+          <UserOutlined />
+        </Button>
+        <Button className="navbar-container-buttons__button">
+          <MenuOutlined />
+        </Button>
       </div>
     </section>
   );

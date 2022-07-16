@@ -101,10 +101,21 @@ body {
         li {
           position: relative;
           list-style: none;
-          .dropdown-genres {
+          .sidebar-dropdown {
+            background-color: white;
             position: absolute;
             left: 250px;
             top: 0px;
+            transition: all;
+            transition-duration: 0.3s;
+            z-index: 10;
+            :hover{
+              opacity: 1;
+            }
+            .dropdown__list{
+              display: grid;
+              grid-template-columns: 150px 150px 150px;
+            }
           }
         }
       }

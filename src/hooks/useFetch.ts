@@ -1,17 +1,24 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 
 const url = "https://graphql.anilist.co";
-export const useFetch = (query: string) => {
+
+type FetchVariablesType = {
+  page: number;
+  perPage: number;
+};
+
+interface FetchProps {
+  query: string;
+  variables?: FetchVariablesType;
+};
+
+
+export const useFetch = ({query, variables}: any) => {
   const [data, setData] = useState<any>(null);
   const [error, setError] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  var variables = {
-    page: 1,
-    perPage: 25,
-  };
-  var options = {
+  let options = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -37,5 +44,6 @@ export const useFetch = (query: string) => {
       setLoading(false);
     }
   }, [query]);
+
   return { data, error, loading };
 };

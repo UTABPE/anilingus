@@ -1,8 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import LoginPage from "./components/pages/LoginPage";
-import { MainPage } from "./components/pages/MainPage";
 import { BaseLayout } from "./components/templates/BaseTemplate";
-import { MainPageV2 } from "./components/pages/MainPageV2";
+import { MainPageV2 } from "./components/pages/MainPage";
 
 export function AppRoutes() {
   return (
