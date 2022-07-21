@@ -1,6 +1,6 @@
-// @tailwind base;
-// @tailwind components;
-// @tailwind utilities;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 //widths
 
@@ -21,10 +21,15 @@ $orange-800: rgb(154 52 18);
 $orange-900: rgb(124 45 18);
 
 body {
+  width: 100%;
   display: flex;
   justify-content: center;
 }
 #root {
+  
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 //PC
 .App {

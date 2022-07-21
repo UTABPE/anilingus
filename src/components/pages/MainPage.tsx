@@ -1,6 +1,5 @@
 import useWindowDimensions from "../../hooks/useWidnowDimension";
 import { MeryGoLife } from "../../fakedata";
-import { useEffect, useRef, useState } from "react";
 import { AnimeListItem } from "../UI/atoms/AnimeListItem";
 import { Sidebar } from "../UI/organisms/Sidebar";
 import { useFetch } from "../../hooks/useFetch";

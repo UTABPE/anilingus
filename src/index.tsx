@@ -4,6 +4,8 @@ import { Provider } from "react-redux";
 import App from "./App";
 import "./index.scss";
 import { configureStore, createAction, createReducer } from "@reduxjs/toolkit";
+import { Fish } from "./components/modules/Fish/Fish";
+import { MouseCircle } from "./components/modules/Fish/MouseCircle";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
@@ -45,6 +47,8 @@ const store = configureStore({
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+      {/* <MouseCircle /> */}
+      <Fish FISHSPEED={1} />
       <App />
     </Provider>
   </React.StrictMode>
