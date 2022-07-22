@@ -26,10 +26,17 @@ body {
   justify-content: center;
 }
 #root {
-  
   width: 100%;
   display: flex;
   justify-content: center;
+  .fish {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    background: red;
+    z-index: 1010;
+    pointer-events: none;
+  }
 }
 //PC
 .App {
@@ -114,10 +121,10 @@ body {
             transition: all;
             transition-duration: 0.3s;
             z-index: 10;
-            :hover{
+            :hover {
               opacity: 1;
             }
-            .dropdown__list{
+            .dropdown__list {
               display: grid;
               grid-template-columns: 150px 150px 150px;
             }

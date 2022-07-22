@@ -1,9 +1,10 @@
+import "./index.scss";
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
-import App from "./App";
-import "./index.scss";
 import { configureStore, createAction, createReducer } from "@reduxjs/toolkit";
+import { GlobalContextProvider } from "./GlobalContext";
+import App from "./App";
 import { Fish } from "./components/modules/Fish/Fish";
 import { MouseCircle } from "./components/modules/Fish/MouseCircle";
 
@@ -46,10 +47,12 @@ const store = configureStore({
 
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      {/* <MouseCircle /> */}
-      <Fish FISHSPEED={1} />
-      <App />
-    </Provider>
+    <GlobalContextProvider>
+      <Provider store={store}>
+        {/* <MouseCircle /> */}
+        <Fish FISHSPEED={1} />
+        <App />
+      </Provider>
+    </GlobalContextProvider>
   </React.StrictMode>
 );

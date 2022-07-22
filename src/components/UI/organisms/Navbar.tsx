@@ -1,17 +1,72 @@
+import React from "react";
 import { MenuOutlined, UserOutlined } from "@ant-design/icons";
-import useWindowDimensions from "../../../hooks/useWidnowDimension";
+import { GetSearchedAnime } from "../../../api/api";
+import { GlobalContext } from "../../../GlobalContext";
 import { Button } from "../atoms/Button";
-import { Input } from "../atoms/Input";
+import { Search } from "../atoms/Search";
+
+const query = `
+  query ($id: Int, $page: Int, $perPage: Int, $search: String) {
+    Page(page: $page, perPage: $perPage){
+      media(id: $id, search: $search){
+        id
+        title{
+          english
+          userPreferred
+        }
+        coverImage{
+          large
+        }
+        description
+        status
+        startDate {
+          year
+          month
+          day
+        }
+        genres
+        averageScore
+        siteUrl
+      }
+    }
+  }
+`;
 
 export function NavbarV2() {
-  // const { width } = useWindowDimensions();
+  const globalContext = React.useContext(GlobalContext);
+
+  const SearchHandle = (e: React.FormEvent<HTMLInputElement>) => {
+    globalContext?.setSearchInput(e.currentTarget.value);
+  };
+
+  React.useEffect(() => {
+    const searchTimout = setTimeout(() => {
+      if (globalContext?.searchInput) {
+        GetSearchedAnime({
+          query: query,
+          search: globalContext?.searchInput,
+        }).then((data) => globalContext?.setFiltredAnime(data));
+        globalContext?.setIsFiltred(true);
+      } else {
+        globalContext?.setIsFiltred(false);
+      }
+    }, 1000);
+
+    return () => {
+      clearTimeout(searchTimout);
+    };
+  }, [globalContext?.searchInput]);
+
+  // console.log(globalContext?.filtredAnime);
+
   return (
-    <section
-      className="navbar-container"
-      // style={width > 1280 ? { width: 1280 } : { width: width }}
-    >
+    <section className="navbar-container">
       <h1 className="navbar-container__logo">ANILINGUS</h1>
-      <Input placeholder="Search" className="navbar-container__search" />
+      <Search
+        placeholder="Search"
+        className="navbar-container__search"
+        onChange={SearchHandle}
+      />
       <div className="navbar-container-buttons">
         <Button>ТОП 100</Button>
         <Button>Аниме</Button>

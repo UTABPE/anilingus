@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
-import { PositionType, useGetMousePosition } from "../../../hooks/useGetMousePosition";
+import {
+  PositionType,
+  useGetMousePosition,
+} from "../../../hooks/useGetMousePosition";
 import { useGetMoveAB } from "../../../hooks/useMove";
 
 // const FISHSPEED = 0.1;
 
 const DELAY = 120;
 
-export const Fish = ({FISHSPEED}:any) => {
+export const Fish = ({ FISHSPEED }: any) => {
   const { position } = useGetMousePosition();
   const [positionFish, setPostitionFish] = useState<PositionType>({
     x: 0,
@@ -52,15 +55,11 @@ export const Fish = ({FISHSPEED}:any) => {
   return (
     <>
       <div
+        className="fish"
         style={{
-          width: "25px",
-          height: "25px",
-          position: "absolute",
-          background: "red",
           left: `${positionFish.x - 25 / 2}px`,
           top: `${positionFish.y - 25 / 2}px`,
           transform: `rotate(${angle}deg)`,
-          zIndex: '100'
         }}
       >
         <>fish</>
